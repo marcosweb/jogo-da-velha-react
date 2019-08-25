@@ -6,6 +6,11 @@ body {
   ol, ul {
     padding-left: 30px;
   }
+
+  li {
+    list-style: none;
+    display: inline;
+  }
   
   .board-row:after {
     clear: both;
