@@ -1,29 +1,33 @@
 import React from 'react';
-import Square from './Square';
+import { connect } from 'react-redux'
 
-export default function Board(props) {
-  const { status, squares } = props.state;
-  const showSquare = i => (
-    <Square value={squares[i]} onClick={() => props.handleClick(i)} />
-  );
+import Square from './Square';
+import Status from './Status';
+
+const mapStateToProps = state => ({ state: state });
+
+function Board(props) {
+
   return (
     <div>
-      <div className="status">{status}</div>
+      <Status />
       <div className="board-row">
-        {showSquare(0)}
-        {showSquare(1)}
-        {showSquare(2)}
+        <Square value={0} />
+        <Square value={1} />
+        <Square value={2} />
       </div>
       <div className="board-row">
-        {showSquare(3)}
-        {showSquare(4)}
-        {showSquare(5)}
+        <Square value={3} />
+        <Square value={4} />
+        <Square value={5} />
       </div>
       <div className="board-row">
-        {showSquare(6)}
-        {showSquare(7)}
-        {showSquare(8)}
+        <Square value={6} />
+        <Square value={7} />
+        <Square value={8} />
       </div>
     </div>
   );
 }
+
+export default connect(mapStateToProps)(Board);
