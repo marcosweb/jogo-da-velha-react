@@ -1,5 +1,3 @@
-
-
 const init = () => {
   const squares = Array(9).fill(null);
   return {
@@ -31,34 +29,36 @@ const calculateWinner = squares => {
   return null;
 }
 
-export const squareReducer = (state = init(), action) => {
-  switch (action.type) {
-    
-    case 'HANDLE_CLICK':
-      let { squares, xIsNext, history, current, winner } = { ...state };
-      if (winner || squares[action.payload]) {
-        return state;
-      }
-      squares[action.payload] = xIsNext ? 'X' : 'O';
-      if (!winner) {
-        winner = calculateWinner(squares);
-      }
-      history.push([...squares]);
-      current = history.length - 1;
-      xIsNext = !xIsNext;
-      return { ...state, squares, xIsNext, history, current, winner };
-
-    case 'CLICK_HISTORY':
-      const index = action.payload;
-      const _squares = [...state.history[index]];
-      const _history = state.history.slice(0, index + 1);
-      const _xIsNext = index % 2 === 0;
-      return { ...state, squares: _squares, history: _history, xIsNext: _xIsNext };
-
-    case 'CLICK_RESTART':
-      return init();
-
-    default:
+const reducers = {
+  HANDLE_CLICK: (state, action) => {
+    let { squares, xIsNext, history, current, winner } = { ...state };
+    if (winner || squares[action.payload]) {
       return state;
+    }
+    squares[action.payload] = xIsNext ? 'X' : 'O';
+    if (!winner) {
+      winner = calculateWinner(squares);
+    }
+    history.push([...squares]);
+    current = history.length - 1;
+    xIsNext = !xIsNext;
+    return { ...state, squares, xIsNext, history, current, winner };
+  },
+
+  CLICK_HISTORY: (state, action) => {
+    const index = action.payload;
+    const squares = [...state.history[index]];
+    const history = state.history.slice(0, index + 1);
+    const xIsNext = index % 2 === 0;
+    return { ...state, squares, history, xIsNext };
+  },
+
+  CLICK_RESTART: (state, action) => {
+    return init();
   }
+}
+
+export const squareReducer = (state = init(), action) => {
+  const fn = reducers[action.type];
+  return (fn && fn(state, action)) || state;
 };

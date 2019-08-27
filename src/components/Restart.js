@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -10,7 +9,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({ clickRestart }, disp
 
 function Restart(props) {
   const { winner } = props.state.data;
-  
+
   if (!winner) return null;
 
   return (
