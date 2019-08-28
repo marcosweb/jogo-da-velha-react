@@ -1,4 +1,4 @@
-const init = () => {
+export const init = () => {
   const squares = Array(9).fill(null);
   return {
     squares,
@@ -29,7 +29,7 @@ const calculateWinner = squares => {
   return null;
 }
 
-const reducers = {
+export const reducers = {
   HANDLE_CLICK: (state, action) => {
     let { squares, xIsNext, history, current, winner } = { ...state };
     if (winner || squares[action.payload]) {
@@ -62,3 +62,18 @@ export const squareReducer = (state = init(), action) => {
   const fn = reducers[action.type];
   return (fn && fn(state, action)) || state;
 };
+
+export function reducer(state = initialState, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return {
+        count: state.count + 1,
+      }
+    case 'DECREMENT':
+      return {
+        count: state.count - 1,
+      }
+    default:
+      return state
+  }
+}

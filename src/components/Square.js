@@ -10,9 +10,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({ clickSquare }, dispa
 function Square(props) {
   const { value } = props;
   const square = props.state.data.squares[value];
-  
+  const id = 'square-' + value;
   return (
-    <button className="square" onClick={() => props.clickSquare(value)}>
+    <button className="square" id={id} onClick={() => props.clickSquare(value)}>
       {square}
     </button>
   );

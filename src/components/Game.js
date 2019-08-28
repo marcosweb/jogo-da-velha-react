@@ -1,24 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
-
+import React from 'react';
 import History from './History';
 import Board from './Board';
 
-const mapStateToProps = state => ({ state: state });
-export class Game extends Component {
-
-  render() {
-    return (
-      <div className="game">
-        <div className="game-board">
-          <Board state={this.props.state} />
-        </div>
-        <div className="game-info">
-          <History />
-        </div>
+export default function Game() {
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board />
       </div>
-    );
-  }
+      <div className="game-info">
+        <History />
+      </div>
+    </div>
+  );
 }
-
-export default connect(mapStateToProps)(Game);

@@ -1,13 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux'
-
 import Square from './Square';
 import Status from './Status';
 
-const mapStateToProps = state => ({ state: state });
-
-function Board(props) {
-
+export default function Board() {
   return (
     <div>
       <Status />
@@ -29,5 +24,3 @@ function Board(props) {
     </div>
   );
 }
-
-export default connect(mapStateToProps)(Board);
